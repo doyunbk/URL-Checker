@@ -5,13 +5,9 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/url-checker/handler"
 	redis "github.com/url-checker/model"
 )
-
-// UrlHandler process HTTP request
-func UrlHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Url Handler")
-}
 
 func main() {
 	pool := redis.InitPool()
@@ -25,7 +21,7 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", UrlHandler)
+	mux.HandleFunc("/", handler.UrlHandler)
 	log.Println("Localhost is running on port 8000")
 	http.ListenAndServe("localhost:8000", mux)
 }
