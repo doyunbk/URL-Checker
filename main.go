@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/url-checker/handler"
-	"github.com/url-checker/model"
+	"./handler"
+	"./model"
 )
 
 func main() {

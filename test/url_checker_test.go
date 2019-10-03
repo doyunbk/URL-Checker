@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/url-checker/handler"
-	"github.com/url-checker/model"
+	"../handler"
+	"../model"
 )
 
 var err error

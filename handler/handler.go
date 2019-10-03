@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/url-checker/model"
+	"../model"
 )
 
 // URL handler processes HTTP GET request
