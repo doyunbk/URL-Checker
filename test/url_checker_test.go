@@ -7,13 +7,13 @@ import (
 	"strings"
 	"testing"
 
-	"../handler"
-	"../model"
+	"github.com/url-checker/handler"
+	"github.com/url-checker/model"
 )
 
 var err error
 
-// Assign a given URL to test whether it is a malicious website on basis of the database
+// Assign URL to test whether it is an unsafe website on basis of the database
 func TestUrlUnsafeFromDb(t *testing.T) {
 	conn := model.GetPool().Get()
 	_, err = conn.Do("HMSET", "www.example.com", "url", "www.example.com", "status", "Unsafe")
@@ -40,7 +40,7 @@ func TestUrlUnsafeFromDb(t *testing.T) {
 	}
 }
 
-// Assign a given URL to test whether it is a safe website on basis of the database
+// Assign URL to test whether it is a safe website on basis of the database
 func TestUrlSafeFromDb(t *testing.T) {
 	conn := model.GetPool().Get()
 	_, err = conn.Do("HMSET", "www.example1.com", "url", "www.example1.com", "status", "Safe")
@@ -67,7 +67,7 @@ func TestUrlSafeFromDb(t *testing.T) {
 	}
 }
 
-// Assign a given URL to test whether it is not in the database, considered to be unknown
+// Assign URL to test whether it is not in the database, considered to be unknown url
 func TestUrlNotInDb(t *testing.T) {
 	url := string("www.example2.com")
 
@@ -88,7 +88,7 @@ func TestUrlNotInDb(t *testing.T) {
 	}
 }
 
-// Do not assign any URL to test whether this app gives an error message to let user provide URL
+// Do not assign any URL to test whether this app gives an error message to provide URL
 func TestGivenUrlEmpty(t *testing.T) {
 
 	req, err := http.NewRequest("GET", "/", nil)

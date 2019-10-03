@@ -15,20 +15,6 @@ var NoUrlFound = errors.New("no url found")
 
 var err error
 
-// Seed two key:value pair data for quick testing
-func SeedData() {
-	conn := GetPool().Get()
-	_, err = conn.Do("HMSET", "www.example.com", "url", "www.example.com", "status", "Unsafe")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	_, err = conn.Do("HMSET", "www.example1.com", "url", "www.example1.com", "status", "Safe")
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // Initialize the pool of Redis database
 // for creating and configuring a connection
 func InitPool() *redis.Pool {
@@ -67,7 +53,7 @@ func GetPool() *redis.Pool {
 	return pool
 }
 
-// GetURL is getting the values of URL from Redis database by searching keys
+// Get values of URL from Redis database by searching keys
 func GetURL(url string) (*URL, error) {
 	conn := GetPool().Get()
 
@@ -89,4 +75,18 @@ func GetURL(url string) (*URL, error) {
 	}
 
 	return &lookupurl, nil
+}
+
+// Populate database with an initial set of data
+func SeedData() {
+	conn := GetPool().Get()
+	_, err = conn.Do("HMSET", "www.example.com", "url", "www.example.com", "status", "Unsafe")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = conn.Do("HMSET", "www.example1.com", "url", "www.example1.com", "status", "Safe")
+	if err != nil {
+		log.Fatal(err)
+	}
 }

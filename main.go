@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"./handler"
-	"./model"
+	"github.com/url-checker/handler"
+	"github.com/url-checker/model"
 )
 
 func main() {
@@ -23,6 +23,6 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handler.UrlHandler)
-	log.Println("Localhost is running on port 8000")
+	log.Println("Server is running on port 8000")
 	http.ListenAndServe(":8000", mux)
 }
