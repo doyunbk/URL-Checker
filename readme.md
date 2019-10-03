@@ -164,4 +164,4 @@ ok      github.com/url-checker/test     0.021s
 
 ## Thought Exercise
 
-Please review [ThoughtExcercise.pdf](https://)
+Please review [ThoughtExcercise.pdf](https://github.com/doyunbk/URL-Checker/blob/master/)
