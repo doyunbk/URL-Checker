@@ -15,7 +15,7 @@ URL has 3 types of status:
 * `unsafe` : URL is not safe to access on basis of the database. This URL is known as bad and unsafe website, and would be considered as malicious URL
 * `Unknown` : Given URL is not in the database, and would be considered as unknown URL
 
-## REST API Architecture
+## REST API Service Architecture
 
 ![REST API Architecture](https://github.com/doyunbk/URL-Checker/blob/master/REST_API_architecture.png)
 
