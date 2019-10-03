@@ -83,12 +83,12 @@ $ redis-cli
 Redis stores data in a simple key-value pair.
 ```sh
 +==================+==============================+
-|                  |            Value             |
-+       Key        +==================+===========+
-|                  |        URL       |   Status  |
-+==================+------------------+-----------+
-|www.example.com   |www.example.com   | Unsafe    |
-|www.example1.com  |www.example1.com  | Safe      |
+|        Key       |            Value             |
++==================+==================+===========+
+|         -        |        URL       |   Status  |
++------------------+------------------+-----------+
+|  www.example.com |  www.example.com |  Unsafe   |
+| www.example1.com | www.example1.com |   Safe    |
 +------------------+------------------+-----------+
 ```
 
