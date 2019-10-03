@@ -23,5 +23,5 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handler.UrlHandler)
 	log.Println("Localhost is running on port 8000")
-	http.ListenAndServe("localhost:8000", mux)
+	http.ListenAndServe(":8000", mux)
 }

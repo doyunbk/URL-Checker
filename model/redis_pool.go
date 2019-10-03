@@ -3,6 +3,7 @@ package model
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/gomodule/redigo/redis"
 )
@@ -16,7 +17,11 @@ var NoUrlFound = errors.New("no url found")
 func InitPool() *redis.Pool {
 	return &redis.Pool{
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", "localhost:6379")
+			redisURL := os.Getenv("REDIS_URL")
+			if len(redisURL) == 0 {
+				redisURL = "localhost:6379"
+			}
+			c, err := redis.Dial("tcp", redisURL)
 			if err != nil {
 				panic(err.Error())
 			}
