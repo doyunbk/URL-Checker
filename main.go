@@ -11,6 +11,7 @@ import (
 
 func main() {
 	pool := model.InitPool()
+	model.SeedData()
 	conn := pool.Get()
 
 	defer conn.Close()

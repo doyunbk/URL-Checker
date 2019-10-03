@@ -3,6 +3,7 @@ package model
 import (
 	"errors"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/gomodule/redigo/redis"
@@ -11,6 +12,22 @@ import (
 var pool *redis.Pool
 
 var NoUrlFound = errors.New("no url found")
+
+var err error
+
+// Seed two key:value pair data for quick testing
+func SeedData() {
+	conn := GetPool().Get()
+	_, err = conn.Do("HMSET", "www.example.com", "url", "www.example.com", "status", "Unsafe")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = conn.Do("HMSET", "www.example1.com", "url", "www.example1.com", "status", "Safe")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
 // Initialize the pool of Redis database
 // for creating and configuring a connection
