@@ -7,15 +7,15 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/lookup/redis"
-	"github.com/url-checker/handler"
+	"../handler"
+	"../model"
 )
 
 var err error
 
 // Assign a given URL to test whether it is a malicious website on basis of the database
 func TestUrlUnsafeFromDb(t *testing.T) {
-	conn := redis.GetPool().Get()
+	conn := model.GetPool().Get()
 	_, err = conn.Do("HMSET", "www.example.com", "url", "www.example.com", "status", "Unsafe")
 	if err != nil {
 		log.Fatal(err)
@@ -42,7 +42,7 @@ func TestUrlUnsafeFromDb(t *testing.T) {
 
 // Assign a given URL to test whether it is a safe website on basis of the database
 func TestUrlSafeFromDb(t *testing.T) {
-	conn := redis.GetPool().Get()
+	conn := model.GetPool().Get()
 	_, err = conn.Do("HMSET", "www.example1.com", "url", "www.example1.com", "status", "Safe")
 	if err != nil {
 		log.Fatal(err)
