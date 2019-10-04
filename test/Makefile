@@ -1,4 +1,4 @@
-run:
+redis:
 	redis-server
 
 test:
