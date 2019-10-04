@@ -65,6 +65,20 @@ Run this application using Docker
 $ docker-compose build
 $ docker-compose up
 ```
+## Makefile
+
+Run this application using Makefile
+```sh
+$ make build
+$ make run
+```
+Test 5 unit test cases using Makefile
+```sh
+$ cd test
+$ make redis
+$ make test
+```
+
 
 
 ## Database
