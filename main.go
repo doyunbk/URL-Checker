@@ -20,7 +20,6 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handler.UrlHandler)
 	log.Println("Server is running on port 8000")
