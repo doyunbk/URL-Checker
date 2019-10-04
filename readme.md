@@ -111,6 +111,7 @@ Redis stores data in a simple key-value pair.
 #### Check URL Status
 
 HTTP GET request checks the given url status from `REDIS` database 
+
 `GET /urlinfo/1/{hostname_and_port}/{original_path_and_query_string}`
 
 #### Example
