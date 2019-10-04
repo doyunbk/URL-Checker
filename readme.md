@@ -72,7 +72,7 @@ Run this application using Makefile
 $ make build
 $ make run
 ```
-Test 5 unit test cases using Makefile, make sure redis is intalled
+Run 5 unit test cases using Makefile, make sure that redis is installed
 ```sh
 $ cd test
 $ make redis
@@ -83,8 +83,8 @@ $ make test
 
 ## Database
 
-#### Redis Database Setup & Database Seeding
-Setup Redis database and seed database with test data
+#### Redis Database Setup & Database update
+Setup Redis database and update database
 ```sh
 $ redis-server
 $ redis-cli
