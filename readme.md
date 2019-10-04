@@ -72,7 +72,7 @@ Run this application using Makefile
 $ make build
 $ make run
 ```
-Test 5 unit test cases using Makefile
+Test 5 unit test cases using Makefile, make sure redis is intalled
 ```sh
 $ cd test
 $ make redis

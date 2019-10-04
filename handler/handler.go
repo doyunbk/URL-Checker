@@ -12,6 +12,7 @@ import (
 
 var validatingURL string
 
+// Validate URLs
 func validateUrl(str string) bool {
 	u, err := url.Parse(str)
 	return err == nil && u.Scheme != "" && u.Host != ""
@@ -31,7 +32,6 @@ func UrlHandler(w http.ResponseWriter, r *http.Request) {
 		validatedurl := strings.Split(r.URL.Path, "/")[1]
 		lookup, err := model.GetURL(validatedurl)
 
-		// Write the url details as application/json to the client
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(lookup)
 

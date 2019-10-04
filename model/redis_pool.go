@@ -59,7 +59,6 @@ func GetURL(url string) (*URL, error) {
 
 	defer conn.Close()
 
-	// Lookup all fields and values of urls in the database
 	urls, err := redis.Values(conn.Do("HGETALL", ""+url))
 	if err != nil {
 		return nil, err
@@ -67,7 +66,6 @@ func GetURL(url string) (*URL, error) {
 		return nil, NoUrlFound
 	}
 
-	// Scan the struct of values of urls
 	var lookupurl URL
 	err = redis.ScanStruct(urls, &lookupurl)
 	if err != nil {
