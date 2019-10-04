@@ -13,6 +13,27 @@ import (
 
 var err error
 
+// Assign URL to test whether it is an invalidated url
+func TestInvalidateUrl(t *testing.T) {
+	url := string(";zc3b:-$`www.validateurl.com/zv/?bceq**&dvcse/")
+
+	req, err := http.NewRequest("GET", "/"+url, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(handler.UrlHandler)
+
+	handler.ServeHTTP(rr, req)
+
+	expected := `Cannot validate url`
+	if strings.TrimRight(rr.Body.String(), "\n") != expected {
+		t.Errorf("Handler returned unexpected values: received %v but expected %v",
+			rr.Body.String(), expected)
+	}
+}
+
 // Assign URL to test whether it is an unsafe website on basis of the database
 func TestUrlUnsafeFromDb(t *testing.T) {
 	conn := model.GetPool().Get()
@@ -21,7 +42,7 @@ func TestUrlUnsafeFromDb(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	url := string("www.example.com")
+	url := string("www.example.com/&qed?cxvvczd#&/z&32d")
 
 	req, err := http.NewRequest("GET", "/"+url, nil)
 	if err != nil {
@@ -48,7 +69,7 @@ func TestUrlSafeFromDb(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	url := string("www.example1.com")
+	url := string("www.example1.com/?cvde#?bcx34g1dwe/zcv~@#asz/")
 
 	req, err := http.NewRequest("GET", "/"+url, nil)
 	if err != nil {
@@ -69,7 +90,7 @@ func TestUrlSafeFromDb(t *testing.T) {
 
 // Assign URL to test whether it is not in the database, considered to be unknown url
 func TestUrlNotInDb(t *testing.T) {
-	url := string("www.example2.com")
+	url := string("www.example2.com/&fvcx$233/vcds!?54dza")
 
 	req, err := http.NewRequest("GET", "/"+url, nil)
 	if err != nil {
@@ -81,7 +102,7 @@ func TestUrlNotInDb(t *testing.T) {
 
 	handler.ServeHTTP(rr, req)
 
-	expected := `null` + "\n" + `Unknown url: not found in DB`
+	expected := `null` + "\n" + `Unknown url: cannot found in db`
 	if strings.TrimRight(rr.Body.String(), "\n") != expected {
 		t.Errorf("Handler returned unexpected values: received %v but expected %v",
 			rr.Body.String(), expected)
@@ -101,7 +122,7 @@ func TestGivenUrlEmpty(t *testing.T) {
 
 	handler.ServeHTTP(rr, req)
 
-	expected := `null` + "\n" + `No url is given, please provide URL`
+	expected := `No url is given, please provide URL`
 	if strings.TrimRight(rr.Body.String(), "\n") != expected {
 		t.Errorf("Handler returned unexpected values: received %v but expected %v",
 			rr.Body.String(), expected)

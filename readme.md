@@ -100,9 +100,21 @@ HTTP GET request checks the given url status from `REDIS` database
 `GET /urlinfo/1/{hostname_and_port}/{original_path_and_query_string}`
 
 #### Example
-Check URL is a safe website or not, and HTTP GET request returns JSON object of a given url
+
+##### Check URL is validated
+
+If URL is invalidated, HTTP response is made with the following log
+
 ```sh
-$ curl -X GET localhost:8000/www.example.com
+$ curl -X GET localhost:8000/;zc3b:-$`www.validateurl.com/zv/?bceq**&dvcse/
+$ Cannot validate url
+```
+
+##### Once URL is validated
+
+Check URL is a safe website or not, and HTTP response is made with JSON object of a given url
+```sh
+$ curl -X GET localhost:8000/www.example.com/&qed?cxvvczd#&/z&32d
 ```
 ```sh
 {
@@ -112,7 +124,7 @@ $ curl -X GET localhost:8000/www.example.com
 ```
 
 ```sh
-$ curl -X GET localhost:8000/www.example1.com
+$ curl -X GET localhost:8000/www.example1.com/?cvde#?bcx34g1dwe/zcv~@#asz/
 ```
 ```sh
 {
@@ -121,12 +133,12 @@ $ curl -X GET localhost:8000/www.example1.com
 }
 ```
 
-Check URL is not in the database, and HTTP GET request returns the following log
+Check URL is not in the database, and HTTP response is made with the following log
 ```sh
-$ curl -X GET localhost:8000/www.example2.com
-$ Unknown url: not found in DB
+$ curl -X GET localhost:8000/www.example2.com/&fvcx$233/vcds!?54dza
+$ Unknown url: cannot found in DB
 ```
-Check URL is not given, and HTTP GET request returns the following log
+Check URL is not given, and HTTP response is made with the following log
 ```sh
 $ curl -X GET localhost:8000/
 $ No url is given, please provide URL
@@ -135,14 +147,16 @@ $ No url is given, please provide URL
 
 ## Test
 
-There are 4 test cases for this application.
-##### 1. Test for unsafe URL from DB 
+There are 5 test cases for this application.
+##### 1. Test for invalidated url
+Assign URL to test whether it is an invalidated url
+##### 2. Test for unsafe URL from DB 
 Assign URL to test whether it is an unsafe website on basis of the database
-##### 2. Test for safe URL from DB
+##### 3. Test for safe URL from DB
 Assign URL to test whether it is a safe website on basis of the database
-##### 3. Test for URL not in DB
+##### 4. Test for URL not in DB
 Assign URL to test whether it is not in the database, considered to be unknown url
-##### 4. Test for given URL empty
+##### 5. Test for given URL empty
 Do not assign any URL to test whether this app gives an error message to provide URL
 
 #### Testing all test cases
@@ -150,6 +164,8 @@ Do not assign any URL to test whether this app gives an error message to provide
 ```sh
 $ go test -v
 
+=== RUN   TestInvalidateUrl
+--- PASS: TestInvalidateUrl (0.00s)
 === RUN   TestUrlUnsafeFromDb
 --- PASS: TestUrlUnsafeFromDb (0.00s)
 === RUN   TestUrlSafeFromDb
@@ -159,7 +175,7 @@ $ go test -v
 === RUN   TestGivenUrlEmpty
 --- PASS: TestGivenUrlEmpty (0.00s)
 PASS
-ok      github.com/url-checker/test     0.021s
+ok      github.com/url-checker/test     0.020s
 ```
 
 ## Thought Exercise
