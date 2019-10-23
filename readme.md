@@ -47,7 +47,7 @@ Download from "https://github.com/dmajkic/redis/downloads"
 ```
 Install Golang-Redis package on local machine
 ```sh
-$ go get github.com/gomodule/goredis
+$ go get github.com/gomodule/redigo/redis
 ```
 
 #### Run Application
